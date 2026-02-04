@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact PureDebt Solutions for a free, confidential debt removal assessment. Reach us via phone, WhatsApp, email, or our contact form.">
+    <title>Contact Us | PureDebt Solutions - Get Your Free Assessment</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <img src="images/PDbgrlogo.png" alt="PureDebt Solutions Logo" class="logo-image">
+                <span class="logo-text">PureDebt <span class="logo-accent">Solutions</span></span>
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="debt-removal.html">Debt Removal</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="faqs.html">FAQs</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <a href="contact.html" class="btn btn-primary nav-cta">Get Free Assessment</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Contact Us</h1>
+                <p class="hero-subtitle">Get started with a free, confidential assessment. We're here to help you understand your debt removal options.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2" style="gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="section-title">Send Us a Message</h2>
+                    <p style="color: var(--gray-600); margin-bottom: 2rem;">Fill out the form below and we'll get back to you as soon as possible. All information is confidential and used solely for assessment purposes.</p>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div id="formSuccess" class="form-success" style="display: none;"></div>
+                        <div id="formError" class="form-error-message" style="display: none;"></div>
+                        
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" class="form-input" required placeholder="John Doe">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" class="form-input" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required placeholder="+27 73 384 0515">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" class="form-textarea" required placeholder="Tell us about your situation..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                        
+                        <p style="font-size: 0.875rem; color: var(--gray-600); text-align: center; margin-top: 1rem;">
+                            By submitting this form, you agree to be contacted by PureDebt Solutions regarding your inquiry.
+                        </p>
+                    </form>
+                </div>
+
+                <div>
+                    <h2 class="section-title">Get in Touch</h2>
+                    <p style="color: var(--gray-600); margin-bottom: 2rem;">Prefer to reach us directly? Choose the method that works best for you.</p>
+
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="card">
+                            <div style="display: flex; align-items: start; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; background: var(--primary-600); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <svg width="24" height="24" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Phone</h3>
+                                    <a href="tel:+27733840515" style="color: var(--primary-600); font-weight: 600; font-size: 1.125rem;">+27 73 384 0515</a>
+                                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.25rem;">Click to call</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div style="display: flex; align-items: start; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; background: var(--whatsapp); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">WhatsApp</h3>
+                                    <a href="https://wa.me/27733840515?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20removal%20services." target="_blank" rel="noopener noreferrer" style="color: var(--whatsapp); font-weight: 600; font-size: 1.125rem;">+27 73 384 0515</a>
+                                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.25rem;">Click to chat on WhatsApp</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div style="display: flex; align-items: start; gap: 1rem;">
+                                <div style="width: 48px; height: 48px; background: var(--primary-600); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <svg width="24" height="24" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Email</h3>
+                                    <a href="mailto:mogamaduzair@gmail.com" style="color: var(--primary-600); font-weight: 500; word-break: break-all;">mogamaduzair@gmail.com</a>
+                                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.25rem;">We'll respond within 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="background: var(--primary-50);">
+                            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">Business Hours</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; color: var(--gray-700);">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: 500;">Monday - Friday:</span>
+                                    <span>8:00 AM - 5:00 PM</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: 500;">Saturday:</span>
+                                    <span>9:00 AM - 1:00 PM</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="font-weight: 500;">Sunday:</span>
+                                    <span>Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title text-center">Find Us</h2>
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <div style="aspect-ratio: 16/9; background: var(--gray-200); display: flex; align-items: center; justify-content: center; color: var(--gray-600);">
+                    <p>Google Map Placeholder<br><small>(Embed Google Map here)</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Take Control of Your Debt?</h2>
+                <p>Get a free assessment and discover your options today.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-white">Get Free Assessment</a>
+                    <a href="https://wa.me/27733840515?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20removal%20services." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">WhatsApp Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/PDbgrlogo.png" alt="PureDebt Solutions Logo">
+                        <span class="logo-text">PureDebt <span class="logo-accent">Solutions</span></span>
+                    </div>
+                    <p>Professional debt removal assistance you can trust. Transparent, lawful, and assessment-based solutions.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="debt-removal.html">Debt Removal</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+27733840515">+27 73 384 0515</a></li>
+                        <li><a href="mailto:mogamaduzair@gmail.com">mogamaduzair@gmail.com</a></li>
+                        <li class="footer-hours">
+                            <strong>Business Hours:</strong><br>
+                            Mon-Fri: 8:00 AM - 5:00 PM<br>
+                            Sat: 9:00 AM - 1:00 PM
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><strong>Disclaimer:</strong> Results vary. Assessment required. PureDebt Solutions provides lawful debt removal assistance based on individual circumstances. We do not guarantee specific outcomes. All services are subject to assessment and applicable laws and regulations.</p>
+                <p>&copy; <span id="currentYear"></span> PureDebt Solutions. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/27733840515?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20removal%20services." target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Contact us on WhatsApp">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <div class="mobile-bottom-bar">
+        <a href="tel:+27733840515" class="mobile-action">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            <span>Call</span>
+        </a>
+        <a href="https://wa.me/27733840515?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20removal%20services." target="_blank" rel="noopener noreferrer" class="mobile-action">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            <span>WhatsApp</span>
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
