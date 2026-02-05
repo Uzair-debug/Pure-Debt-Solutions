@@ -1,6 +1,31 @@
 // Netlify Function for handling contact form submissions
 // Based on api/contact.js for serverless email via Resend
 
+const fs = require('fs');
+const path = require('path');
+
+function getEmailHtml(name, email, phone, message, date) {
+    const escape = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const escapedMessage = (message || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/\n/g, '<br>');
+    try {
+        const templatePath = path.join(__dirname, 'emails', 'contact.html');
+        let html = fs.readFileSync(templatePath, 'utf8');
+        return html
+            .replace(/\{\{name\}\}/g, escape(name))
+            .replace(/\{\{email\}\}/g, escape(email))
+            .replace(/\{\{phone\}\}/g, escape(phone))
+            .replace(/\{\{message\}\}/g, escapedMessage)
+            .replace(/\{\{date\}\}/g, escape(date));
+    } catch (e) {
+        return `<h2>New Contact Form Submission</h2><p><strong>Name:</strong> ${escape(name)}</p><p><strong>Email:</strong> ${escape(email)}</p><p><strong>Phone:</strong> ${escape(phone)}</p><p><strong>Message:</strong></p><p>${escapedMessage}</p><hr><p><small>Submitted on: ${escape(date)}</small></p>`;
+    }
+}
+
 exports.handler = async (event, context) => {
     // Only allow POST requests
     if (event.httpMethod !== 'POST') {
@@ -39,6 +64,9 @@ exports.handler = async (event, context) => {
             };
         }
 
+        const submittedDate = new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' });
+        const html = getEmailHtml(name, email, phone, message, submittedDate);
+
         const response = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
@@ -50,16 +78,7 @@ exports.handler = async (event, context) => {
                 to: [process.env.RESEND_TO_EMAIL || 'mogamaduzair@gmail.com'],
                 reply_to: email,
                 subject: `New Contact Form Submission from ${name}`,
-                html: `
-                    <h2>New Contact Form Submission</h2>
-                    <p><strong>Name:</strong> ${name}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Phone:</strong> ${phone}</p>
-                    <p><strong>Message:</strong></p>
-                    <p>${message.replace(/\n/g, '<br>')}</p>
-                    <hr>
-                    <p><small>Submitted on: ${new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}</small></p>
-                `
+                html
             })
         });
 
