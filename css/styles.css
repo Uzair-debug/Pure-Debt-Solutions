@@ -80,6 +80,15 @@
     max-width: 100%;
 }
 
+/* Hide all scrollbars site-wide - scrolling still works */
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+    display: none;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
@@ -149,6 +158,12 @@ a {
     width: 100%;
 }
 
+@media (max-width: 767px) {
+    .header {
+        position: relative;
+    }
+}
+
 .header.scrolled {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     background: rgba(242, 242, 240, 0.98);
@@ -162,6 +177,7 @@ a {
     height: 80px;
     gap: 1rem;
     position: relative;
+    overflow: visible;
 }
 
 @media (max-width: 767px) {
@@ -220,7 +236,6 @@ a {
 }
 
 .nav-menu {
-    display: none;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -234,10 +249,40 @@ a {
     position: relative;
 }
 
+/* Desktop menu */
 @media (min-width: 768px) {
     .nav-menu {
-        display: flex;
+        display: flex !important;
         gap: 0.25rem;
+        position: static !important;
+        transform: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+        flex-direction: row !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: auto !important;
+    }
+    
+    .nav-menu.active {
+        display: flex !important;
+    }
+}
+
+/* Mobile menu - hidden by default, shown when active */
+@media (max-width: 767px) {
+    .nav-menu {
+        display: none !important;
+        position: absolute !important;
+    }
+    
+    .nav-menu.active {
+        display: flex !important;
     }
 }
 
@@ -298,17 +343,29 @@ a {
     display: none;
     flex-shrink: 0;
     white-space: nowrap;
-    font-size: 0.875rem;
-    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+    margin-left: 0.75rem;
+    overflow: visible;
+    text-overflow: clip;
 }
 
 @media (min-width: 768px) {
     .nav-cta {
         display: inline-block;
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.875rem;
     }
 }
 
 @media (min-width: 1024px) {
+    .nav-cta {
+        font-size: 0.9375rem;
+        padding: 0.625rem 1.25rem;
+    }
+}
+
+@media (min-width: 1200px) {
     .nav-cta {
         font-size: 1rem;
         padding: 0.75rem 1.5rem;
@@ -386,11 +443,19 @@ a {
     cursor: pointer;
     transition: all 0.2s ease;
     border: 2px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.btn,
+.btn * {
+    position: relative;
+    z-index: 2;
 }
 
 .btn-primary {
     background: var(--primary-500);
-    color: var(--white);
+    color: var(--white) !important;
     box-shadow: var(--shadow-md);
     position: relative;
     overflow: hidden;
@@ -404,9 +469,11 @@ a {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .btn-primary:hover::before {
@@ -415,9 +482,24 @@ a {
 }
 
 .btn-primary:hover {
-    background: var(--primary-600);
+    background: var(--primary-600) !important;
+    color: var(--white) !important;
     box-shadow: 0 12px 24px -8px rgba(14, 91, 120, 0.4);
     transform: translateY(-3px) scale(1.05);
+}
+
+.btn-primary:hover,
+.btn-primary:hover * {
+    color: var(--white) !important;
+    z-index: 10;
+}
+
+/* Ensure button text is always visible */
+.btn-primary,
+.btn-primary * {
+    position: relative;
+    z-index: 10;
+    color: var(--white) !important;
 }
 
 .btn-primary:active {
@@ -426,43 +508,28 @@ a {
 
 .btn-secondary {
     background: var(--white);
-    color: var(--primary-500);
-    border-color: var(--primary-500);
+    color: var(--primary-500) !important;
+    border: 2px solid var(--primary-500);
     position: relative;
-    overflow: hidden;
-}
-
-.btn-secondary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--primary-500);
-    transition: left 0.3s ease;
-    z-index: 0;
-}
-
-.btn-secondary > * {
-    position: relative;
-    z-index: 1;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-secondary:hover {
-    color: var(--white);
+    background: var(--primary-500);
+    color: var(--white) !important;
     border-color: var(--primary-600);
     transform: translateY(-2px);
     box-shadow: 0 8px 16px -4px rgba(14, 91, 120, 0.3);
 }
 
-.btn-secondary:hover::before {
-    left: 0;
+.btn-secondary:hover,
+.btn-secondary:hover * {
+    color: var(--white) !important;
 }
 
 .btn-white {
     background: var(--white);
-    color: var(--primary-500);
+    color: var(--primary-500) !important;
     position: relative;
     overflow: hidden;
 }
@@ -475,9 +542,11 @@ a {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(14, 91, 120, 0.1);
+    background: rgba(14, 91, 120, 0.08);
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .btn-white:hover::before {
@@ -487,13 +556,19 @@ a {
 
 .btn-white:hover {
     background: var(--neutral-50);
+    color: var(--primary-600) !important;
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.2);
 }
 
+.btn-white:hover,
+.btn-white:hover * {
+    color: var(--primary-600) !important;
+}
+
 .btn-whatsapp {
     background: var(--whatsapp);
-    color: var(--white);
+    color: var(--white) !important;
     box-shadow: var(--shadow-md);
     position: relative;
     overflow: hidden;
@@ -507,9 +582,11 @@ a {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
     transform: translate(-50%, -50%);
     transition: width 0.5s ease, height 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .btn-whatsapp:hover::after {
@@ -518,9 +595,15 @@ a {
 }
 
 .btn-whatsapp:hover {
-    background: #20BA5A;
+    background: #20BA5A !important;
+    color: var(--white) !important;
     box-shadow: 0 12px 24px -8px rgba(37, 211, 102, 0.4);
     transform: translateY(-3px) scale(1.05);
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:hover * {
+    color: var(--white) !important;
 }
 
 .btn-whatsapp:active {
@@ -749,6 +832,7 @@ a {
 .content-wrapper {
     max-width: 768px;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .prose {
@@ -781,21 +865,25 @@ a {
 .grid {
     display: grid;
     gap: 1.5rem;
+    overflow: visible;
 }
 
 .grid > * {
     transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: visible;
 }
 
 .grid-2 {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    overflow: visible;
 }
 
 @media (min-width: 768px) {
     .grid-2 {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+        overflow: visible;
     }
 }
 
@@ -819,29 +907,33 @@ a {
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--neutral-200);
     border-top: 3px solid var(--primary-500);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.5s ease;
+    transition: transform 0.5s ease;
+    transform: translateX(-100%);
+    pointer-events: none;
 }
 
 .card:hover::before {
-    left: 100%;
+    transform: translateX(100%);
 }
 
 .card:hover {
     box-shadow: 0 12px 24px -8px rgba(14, 91, 120, 0.2);
-    transform: translateY(-8px) scale(1.02);
+    transform: translateZ(0) translateY(-8px);
     border-top-color: var(--accent-500);
     border-color: var(--primary-300);
 }
@@ -861,9 +953,12 @@ a {
 .card-alt {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-color: rgba(255, 255, 255, 0.3);
-    transition: all 0.4s ease;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .card-alt::before {
@@ -873,7 +968,7 @@ a {
 .card-alt:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-8px) scale(1.02);
+    transform: translateZ(0) translateY(-8px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
@@ -1403,6 +1498,89 @@ a {
     color: var(--accent-500);
 }
 
+/* Social Media Links */
+.footer-social {
+    margin-top: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #d1d5db;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    transform: translateY(-3px) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.social-link svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-shrink: 0;
+}
+
+/* Instagram specific hover */
+.social-link[aria-label*="Instagram"]:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border-color: transparent;
+    color: #ffffff !important;
+}
+
+.social-link[aria-label*="Instagram"]:hover svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* Facebook specific hover */
+.social-link[aria-label*="Facebook"]:hover {
+    background: #1877f2;
+    border-color: transparent;
+    color: #ffffff !important;
+}
+
+.social-link[aria-label*="Facebook"]:hover svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* TikTok specific hover */
+.social-link[aria-label*="TikTok"]:hover {
+    background: #000000;
+    border-color: transparent;
+    color: #ffffff !important;
+}
+
+.social-link[aria-label*="TikTok"]:hover svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+
 /* Floating WhatsApp */
 .floating-whatsapp {
     position: fixed;
@@ -1476,22 +1654,28 @@ a {
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--white);
-    border-top: 1px solid var(--gray-200);
-    box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(14, 91, 120, 0.1);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
     display: flex;
     justify-content: space-around;
-    padding: 0.75rem 0;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
     z-index: 999;
-    animation: slideInUp 0.4s ease-out;
+    animation: slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideInUp {
     from {
         transform: translateY(100%);
+        opacity: 0;
     }
     to {
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
@@ -1505,14 +1689,21 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
-    color: var(--primary-500);
+    justify-content: center;
+    gap: 0.375rem;
+    color: var(--gray-700);
     font-size: 0.75rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem;
-    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
     position: relative;
+    flex: 1;
+    max-width: 140px;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .mobile-action::before {
@@ -1522,30 +1713,105 @@ a {
     left: 50%;
     width: 0;
     height: 0;
-    background: var(--neutral-100);
-    border-radius: 50%;
+    background: var(--primary-50);
+    border-radius: 12px;
     transform: translate(-50%, -50%);
-    transition: width 0.3s ease, height 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
+    opacity: 0;
 }
 
-.mobile-action:hover::before {
-    width: 60px;
-    height: 60px;
+.mobile-action:hover::before,
+.mobile-action:active::before {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
 }
 
 .mobile-action:hover {
     color: var(--primary-600);
-    transform: scale(1.1);
+    transform: translateY(-2px);
 }
 
 .mobile-action:active {
-    transform: scale(0.95);
+    transform: translateY(0) scale(0.98);
 }
 
 .mobile-action svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.mobile-action:hover svg {
+    transform: scale(1.1);
+}
+
+/* Call button specific styling */
+.mobile-action[aria-label*="Call"],
+.mobile-action[href^="tel:"] {
+    color: var(--primary-600);
+}
+
+.mobile-action[aria-label*="Call"]:hover,
+.mobile-action[href^="tel:"]:hover {
+    color: var(--primary-700);
+}
+
+.mobile-action[aria-label*="Call"]::before,
+.mobile-action[href^="tel:"]::before {
+    background: var(--primary-50);
+}
+
+/* WhatsApp button specific styling */
+.mobile-action[aria-label*="WhatsApp"],
+.mobile-action[href*="wa.me"] {
+    color: var(--whatsapp);
+}
+
+.mobile-action[aria-label*="WhatsApp"]:hover,
+.mobile-action[href*="wa.me"]:hover {
+    color: #20ba5a;
+}
+
+.mobile-action[aria-label*="WhatsApp"]::before,
+.mobile-action[href*="wa.me"]::before {
+    background: rgba(37, 211, 102, 0.1);
+}
+
+.mobile-action span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+/* Add subtle divider between buttons */
+.mobile-bottom-bar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(14, 91, 120, 0.2), transparent);
+    pointer-events: none;
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 767px) {
+    .mobile-action {
+        min-height: 56px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .mobile-bottom-bar {
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    }
 }
 
 /* Utility Classes */
@@ -1665,33 +1931,46 @@ a {
 @media (max-width: 767px) {
     .nav {
         height: 70px;
+        position: relative;
+        overflow: visible;
+    }
+    
+    .header .container {
+        overflow: visible;
+        position: relative;
     }
     
     .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: var(--white);
-        flex-direction: column;
-        padding: 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        gap: 0;
-        max-height: calc(100vh - 70px);
-        overflow-y: auto;
-        z-index: 999;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        background: var(--white) !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-10px) scaleY(0) !important;
+        transform-origin: top center !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease !important;
+        gap: 0 !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        overflow: visible !important;
+        z-index: 9999 !important;
         display: flex !important;
-        visibility: hidden;
-        opacity: 0;
+        margin: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     .nav-menu.active {
-        transform: translateX(0);
-        visibility: visible;
-        opacity: 1;
+        transform: translateY(0) scaleY(1) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
     .nav-menu li {

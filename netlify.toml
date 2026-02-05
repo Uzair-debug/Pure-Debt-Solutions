@@ -1,0 +1,12 @@
+[build]
+  functions = "netlify/functions"
+
+[dev]
+  # Use a lighter dev experience (fewer features, faster start)
+  autoLaunch = false
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+

@@ -21,3 +21,6 @@ dist/
 build/
 .next/
 *.log
+
+# Local Netlify folder
+.netlify

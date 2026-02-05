@@ -46,7 +46,6 @@
             try {
                 return context.querySelector(selector);
             } catch (e) {
-                console.warn('Invalid selector:', selector);
                 return null;
             }
         },
@@ -56,7 +55,6 @@
             try {
                 return Array.from(context.querySelectorAll(selector));
             } catch (e) {
-                console.warn('Invalid selector:', selector);
                 return [];
             }
         }
@@ -66,39 +64,46 @@
     // Mobile Menu Toggle
     // ============================================
     function initMobileMenu() {
-        const mobileMenuToggle = utils.$('#mobileMenuToggle');
-        const navMenu = utils.$('#navMenu');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
         const body = document.body;
         
-        if (!mobileMenuToggle || !navMenu) {
-            console.warn('Mobile menu elements not found');
-            return;
-        }
+        if (!mobileMenuToggle || !navMenu) return;
         
         // Ensure menu starts closed
         navMenu.classList.remove('active');
         mobileMenuToggle.classList.remove('active');
         body.classList.remove('menu-open');
         
-        mobileMenuToggle.addEventListener('click', function(e) {
+        // Remove any existing listeners by cloning
+        const newToggle = mobileMenuToggle.cloneNode(true);
+        mobileMenuToggle.parentNode.replaceChild(newToggle, mobileMenuToggle);
+        
+        // Get fresh reference
+        const toggle = document.getElementById('mobileMenuToggle');
+        const menu = document.getElementById('navMenu');
+        
+        // Toggle menu function
+        function toggleMenu() {
+            const isActive = menu.classList.contains('active');
+            if (isActive) {
+                toggle.classList.remove('active');
+                menu.classList.remove('active');
+                body.classList.remove('menu-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            } else {
+                toggle.classList.add('active');
+                menu.classList.add('active');
+                body.classList.add('menu-open');
+                toggle.setAttribute('aria-expanded', 'true');
+            }
+        }
+        
+        // Add click event listener
+        toggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            const isActive = navMenu.classList.contains('active');
-            
-            if (isActive) {
-                // Close menu
-                mobileMenuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            } else {
-                // Open menu
-                mobileMenuToggle.classList.add('active');
-                navMenu.classList.add('active');
-                body.classList.add('menu-open');
-                mobileMenuToggle.setAttribute('aria-expanded', 'true');
-            }
+            toggleMenu();
         });
 
         // Close menu when clicking outside
@@ -394,5 +399,12 @@
     
     // Start initialization
     init();
+    
+    // Also try to initialize on window load as backup
+    window.addEventListener('load', function() {
+        const toggle = document.getElementById('mobileMenuToggle');
+        const menu = document.getElementById('navMenu');
+        if (toggle && menu) initMobileMenu();
+    });
 
 })();
