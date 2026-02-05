@@ -160,8 +160,14 @@ a {
     align-items: center;
     justify-content: space-between;
     height: 80px;
-    gap: 2rem;
+    gap: 1rem;
     position: relative;
+}
+
+@media (max-width: 767px) {
+    .nav {
+        gap: 0.5rem;
+    }
 }
 
 .logo {
@@ -309,6 +315,13 @@ a {
     }
 }
 
+/* Hide CTA button on mobile completely */
+@media (max-width: 767px) {
+    .nav-cta {
+        display: none !important;
+    }
+}
+
 .mobile-menu-toggle {
     display: flex;
     flex-direction: column;
@@ -320,6 +333,13 @@ a {
     flex-shrink: 0;
     z-index: 1001;
     margin-left: auto;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
 }
 
 @media (min-width: 768px) {
@@ -1652,21 +1672,26 @@ a {
         top: 70px;
         left: 0;
         right: 0;
+        width: 100%;
         background: var(--white);
         flex-direction: column;
         padding: 0;
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         transform: translateX(-100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         gap: 0;
         max-height: calc(100vh - 70px);
         overflow-y: auto;
         z-index: 999;
-        display: flex;
+        display: flex !important;
+        visibility: hidden;
+        opacity: 0;
     }
 
     .nav-menu.active {
         transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
     }
 
     .nav-menu li {

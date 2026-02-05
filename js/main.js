@@ -70,23 +70,31 @@
         const navMenu = utils.$('#navMenu');
         const body = document.body;
         
-        if (!mobileMenuToggle || !navMenu) return;
+        if (!mobileMenuToggle || !navMenu) {
+            console.warn('Mobile menu elements not found');
+            return;
+        }
+        
+        // Ensure menu starts closed
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        body.classList.remove('menu-open');
         
         mobileMenuToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            const isActive = this.classList.contains('active');
+            const isActive = navMenu.classList.contains('active');
             
             if (isActive) {
                 // Close menu
-                this.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.classList.remove('menu-open');
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
             } else {
                 // Open menu
-                this.classList.add('active');
+                mobileMenuToggle.classList.add('active');
                 navMenu.classList.add('active');
                 body.classList.add('menu-open');
                 mobileMenuToggle.setAttribute('aria-expanded', 'true');
