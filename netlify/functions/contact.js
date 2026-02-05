@@ -1,29 +1,49 @@
 // Netlify Function for handling contact form submissions
 // Based on api/contact.js for serverless email via Resend
 
-const fs = require('fs');
-const path = require('path');
+// Template embedded so it works on Netlify (no file read)
+const EMAIL_TEMPLATE = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>New Contact Form Submission</title></head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#f2f2f0;color:#111827;">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#f2f2f0;padding:24px 0;">
+<tr><td align="center">
+<table role="presentation" width="600" cellspacing="0" cellpadding="0" style="max-width:600px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.05);">
+<tr><td style="background:linear-gradient(135deg,#0E5B78 0%,#0d4f68 100%);padding:24px 32px;text-align:center;">
+<h1 style="margin:0;font-size:20px;font-weight:700;color:#fff;">PureDebt Solutions</h1>
+<p style="margin:8px 0 0;font-size:14px;color:rgba(255,255,255,0.9);">Contact Form Submission</p>
+</td></tr>
+<tr><td style="padding:32px;">
+<p style="margin:0 0 20px;font-size:15px;line-height:1.6;">You have received a new message from your website contact form.</p>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e6e6e4;border-radius:8px;margin-bottom:24px;">
+<tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;width:120;"><strong>Name</strong></td><td style="padding:12px 16px;font-size:14px;color:#111827;">{{name}}</td></tr>
+<tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;"><strong>Email</strong></td><td style="padding:12px 16px;font-size:14px;"><a href="mailto:{{email}}" style="color:#0E5B78;text-decoration:none;">{{email}}</a></td></tr>
+<tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;"><strong>Phone</strong></td><td style="padding:12px 16px;font-size:14px;"><a href="tel:{{phone}}" style="color:#0E5B78;text-decoration:none;">{{phone}}</a></td></tr>
+<tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;vertical-align:top;"><strong>Message</strong></td><td style="padding:12px 16px;font-size:14px;line-height:1.6;color:#111827;">{{message}}</td></tr>
+</table>
+<p style="margin:0;font-size:12px;color:#6b7280;">Submitted on {{date}}</p>
+</td></tr>
+<tr><td style="padding:16px 32px;background-color:#f2f2f0;font-size:12px;color:#6b7280;text-align:center;">This email was sent from the contact form at puredebtsolutions.africa</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
 
 function getEmailHtml(name, email, phone, message, date) {
-    const escape = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const escape = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const escapedMessage = (message || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/\n/g, '<br>');
-    try {
-        const templatePath = path.join(__dirname, 'emails', 'contact.html');
-        let html = fs.readFileSync(templatePath, 'utf8');
-        return html
-            .replace(/\{\{name\}\}/g, escape(name))
-            .replace(/\{\{email\}\}/g, escape(email))
-            .replace(/\{\{phone\}\}/g, escape(phone))
-            .replace(/\{\{message\}\}/g, escapedMessage)
-            .replace(/\{\{date\}\}/g, escape(date));
-    } catch (e) {
-        return `<h2>New Contact Form Submission</h2><p><strong>Name:</strong> ${escape(name)}</p><p><strong>Email:</strong> ${escape(email)}</p><p><strong>Phone:</strong> ${escape(phone)}</p><p><strong>Message:</strong></p><p>${escapedMessage}</p><hr><p><small>Submitted on: ${escape(date)}</small></p>`;
-    }
+    return EMAIL_TEMPLATE
+        .replace(/\{\{name\}\}/g, escape(name))
+        .replace(/\{\{email\}\}/g, escape(email))
+        .replace(/\{\{phone\}\}/g, escape(phone))
+        .replace(/\{\{message\}\}/g, escapedMessage)
+        .replace(/\{\{date\}\}/g, escape(date));
 }
 
 exports.handler = async (event, context) => {
