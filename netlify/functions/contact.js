@@ -17,7 +17,7 @@ const EMAIL_TEMPLATE = `<!DOCTYPE html>
 <p style="margin:0 0 20px;font-size:15px;line-height:1.6;">You have received a new message from your website contact form.</p>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e6e6e4;border-radius:8px;margin-bottom:24px;">
 <tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;width:120;"><strong>Name</strong></td><td style="padding:12px 16px;font-size:14px;color:#111827;">{{name}}</td></tr>
-<tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;"><strong>Email</strong></td><td style="padding:12px 16px;font-size:14px;"><a href="mailto:{{email}}" style="color:#0E5B78;text-decoration:none;">{{email}}</a></td></tr>
+<tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;"><strong>Email</strong></td><td style="padding:12px 16px;font-size:14px;"><a href="mailto:{{email}}" style="color:#0E5B78;text-decoration:underline;">{{email}}</a></td></tr>
 <tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;border-bottom:1px solid #e6e6e4;"><strong>Phone</strong></td><td style="padding:12px 16px;font-size:14px;"><a href="tel:{{phone}}" style="color:#0E5B78;text-decoration:none;">{{phone}}</a></td></tr>
 <tr><td style="padding:12px 16px;font-size:13px;color:#4b5563;vertical-align:top;"><strong>Message</strong></td><td style="padding:12px 16px;font-size:14px;line-height:1.6;color:#111827;">{{message}}</td></tr>
 </table>
@@ -95,7 +95,7 @@ exports.handler = async (event, context) => {
             },
             body: JSON.stringify({
                 from: process.env.RESEND_FROM_EMAIL || 'PureDebt Solutions <onboarding@resend.dev>',
-                to: [process.env.RESEND_TO_EMAIL || 'mogamaduzair@gmail.com'],
+                to: [process.env.RESEND_TO_EMAIL || 'admin@puredebtsolutions.africa'],
                 reply_to: email,
                 subject: `New Contact Form Submission from ${name}`,
                 html

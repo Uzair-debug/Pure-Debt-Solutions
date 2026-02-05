@@ -950,6 +950,12 @@ a {
     line-height: 1.7;
 }
 
+/* Ensure links in cards are clickable (above card ::before overlay) */
+.card a {
+    position: relative;
+    z-index: 1;
+}
+
 .card-alt {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);

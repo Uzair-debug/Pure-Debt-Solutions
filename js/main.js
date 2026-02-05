@@ -9,7 +9,7 @@
     // ============================================
     const CONFIG = window.CONFIG || {
         phone: '+27 73 384 0515',
-        email: 'mogamaduzair@gmail.com',
+        email: 'admin@puredebtsolutions.africa',
         apiUrl: '/api/contact'
     };
     
