@@ -77,11 +77,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    max-width: 100%;
 }
 
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -91,6 +94,15 @@ body {
     background: var(--white);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
 }
 
 img {
@@ -111,6 +123,7 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    overflow-x: hidden;
 }
 
 @media (min-width: 640px) {
@@ -1648,11 +1661,12 @@ a {
         gap: 0;
         max-height: calc(100vh - 70px);
         overflow-y: auto;
+        z-index: 999;
+        display: flex;
     }
 
     .nav-menu.active {
         transform: translateX(0);
-        display: flex;
     }
 
     .nav-menu li {
