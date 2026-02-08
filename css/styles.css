@@ -2181,6 +2181,12 @@ a {
     opacity: 1;
 }
 
+/* Privacy policy: show content immediately (long page, scroll animation can leave content hidden) */
+.page-privacy-policy .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+}
+
 .fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
 }

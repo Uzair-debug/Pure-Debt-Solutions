@@ -340,7 +340,9 @@
             rootMargin: '0px 0px -50px 0px'
         });
 
-        // Animate cards and sections
+        // Animate cards and sections (skip on privacy policy so long content is visible immediately)
+        if (document.body.classList.contains('page-privacy-policy')) return;
+
         utils.$$('.card, .step-card, .faq-item, .section').forEach((el) => {
             if (!el.classList.contains('hero')) {
                 el.classList.add('animate-on-scroll');
