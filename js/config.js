@@ -9,8 +9,7 @@ const CONFIG = {
     
     // Business Hours
     businessHours: {
-        weekdays: 'Mon-Fri: 8:00 AM - 5:00 PM',
-        saturday: 'Sat: 9:00 AM - 1:00 PM'
+        weekdays: 'Mon-Fri: 8:00 AM - 5:00 PM'
     },
     
     // URLs
