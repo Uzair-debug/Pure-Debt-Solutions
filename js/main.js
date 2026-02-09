@@ -213,17 +213,30 @@
                     body: JSON.stringify(data)
                 });
 
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (_) {
+                    // Server returned non-JSON (e.g. 404 page when form backend isn't running)
+                    if (!response.ok) {
+                        showFormError('The form could not be sent. The contact form only works when the site is deployed on Netlify or when you run "netlify dev" locally. Please contact us by phone or WhatsApp instead.');
+                        return;
+                    }
+                    throw new Error('Invalid response');
+                }
 
                 if (response.ok && result.success) {
                     showFormSuccess(result.message || 'Thank you! We\'ve received your message and will contact you soon.');
                     this.reset();
                 } else {
-                    throw new Error(result.error || 'Failed to send message');
+                    showFormError(result.error || 'Failed to send message. Please try again or contact us by phone or WhatsApp.');
                 }
             } catch (error) {
-                console.error('Form submission error:', error);
-                showFormError('Something went wrong. Please try again or contact us directly via phone or WhatsApp.');
+                if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
+                    showFormError('The form could not be sent. The contact form only works when the site is deployed on Netlify or when you run "netlify dev" locally. Please contact us by phone or WhatsApp instead.');
+                } else {
+                    showFormError('Something went wrong. Please try again or contact us directly via phone or WhatsApp.');
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;

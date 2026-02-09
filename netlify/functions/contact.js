@@ -103,7 +103,9 @@ exports.handler = async (event, context) => {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to send email');
+            const errBody = await response.json().catch(() => ({}));
+            const msg = errBody.message || errBody.error || `Resend API error (${response.status})`;
+            throw new Error(msg);
         }
 
         return {
@@ -119,9 +121,11 @@ exports.handler = async (event, context) => {
         };
     } catch (error) {
         console.error('Contact form error:', error);
+        const message = error.message || 'Internal server error';
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Internal server error' })
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+            body: JSON.stringify({ error: message })
         };
     }
 };
