@@ -8,7 +8,7 @@ Static website for PureDebt Solutions. Deploy on Netlify; contact form uses Rese
 2. **Environment variables** (Site settings → Environment variables):
    - `RESEND_API_KEY` – Resend API key
    - `RESEND_FROM_EMAIL` – e.g. `PureDebt Solutions <onboarding@resend.dev>`
-   - `RESEND_TO_EMAIL` – email to receive form submissions
+   - `RESEND_TO_EMAIL` – email to receive form submissions (use `admin@puredebtsolutions.africa`)
 3. Add custom domain `puredebtsolutions.africa` in Domain management if needed.
 
 ## Local
@@ -18,7 +18,7 @@ Static website for PureDebt Solutions. Deploy on Netlify; contact form uses Rese
 
 ## Structure
 
-- **HTML:** `index.html`, `about.html`, `contact.html`, `debt-removal.html`, `how-it-works.html`, `faqs.html`, `find-us.html`, `privacy-policy.html`
+- **HTML:** `index.html`, `about.html`, `contact.html`, `debt-review-removal.html`, `how-it-works.html`, `faqs.html`, `find-us.html`, `privacy-policy.html`
 - **CSS:** `css/styles.css`
 - **JS:** `js/config.js` (contact info, apiUrl), `js/main.js` (menu, form, scroll)
 - **Contact form backend:** `netlify/functions/contact.js` (Resend; template embedded)

@@ -5,7 +5,7 @@ const CONFIG = {
     // Contact Information
     phone: '+27 73 384 0515',
     email: 'admin@puredebtsolutions.africa',
-    whatsappMessage: 'Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20removal%20services.',
+    whatsappMessage: 'Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20review%20removal%20services.',
     
     // Business Hours
     businessHours: {
@@ -30,7 +30,7 @@ const CONFIG = {
     
     // Company Info
     companyName: 'PureDebt Solutions',
-    tagline: 'Professional debt removal assistance you can trust. Transparent, lawful, and assessment-based solutions.'
+    tagline: 'Professional debt review removal assistance you can trust. Transparent, lawful, and assessment-based solutions.'
 };
 
 // Make config available globally
