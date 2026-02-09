@@ -392,6 +392,122 @@
     // ============================================
     // Initialize All Features
     // ============================================
+    // ============================================
+    // WhatsApp ID Modal (required ID before opening WhatsApp)
+    // ============================================
+    function initWhatsAppModal() {
+        const phone = (CONFIG.phone || '').replace(/\s/g, '');
+        const defaultEncoded = (typeof CONFIG.whatsappMessage !== 'undefined' ? CONFIG.whatsappMessage : 'Hello,%20I%20would%20like%20to%20learn%20more%20about%20debt%20review%20removal%20services.');
+        const baseUrl = 'https://wa.me/' + phone + '?text=';
+
+        var pendingHref = '';
+        var backdrop = null;
+        var inputEl = null;
+        var errorEl = null;
+
+        function showIdError(msg) {
+            if (!errorEl) return;
+            errorEl.textContent = msg || '';
+            errorEl.style.display = msg ? 'block' : 'none';
+            if (inputEl) inputEl.setAttribute('aria-invalid', msg ? 'true' : 'false');
+        }
+
+        function createModal() {
+            if (backdrop) return;
+            var div = document.createElement('div');
+            div.className = 'whatsapp-id-modal-backdrop';
+            div.setAttribute('role', 'dialog');
+            div.setAttribute('aria-modal', 'true');
+            div.setAttribute('aria-labelledby', 'whatsapp-modal-title');
+            div.setAttribute('aria-describedby', 'whatsapp-modal-desc');
+            div.innerHTML =
+                '<div class="whatsapp-id-modal">' +
+                '<h3 id="whatsapp-modal-title">Contact us on WhatsApp</h3>' +
+                '<p id="whatsapp-modal-desc">To help us assist you quickly, please enter your ID number. This helps us pull up your details when you message us.</p>' +
+                '<label for="whatsapp-id-input">ID number <span class="required">*</span></label>' +
+                '<input type="text" id="whatsapp-id-input" name="whatsapp-id" placeholder="e.g. 8001015001087" autocomplete="off" inputmode="numeric" pattern="[0-9\\s]*" maxlength="13" required aria-required="true" aria-describedby="whatsapp-id-error">' +
+                '<div id="whatsapp-id-error" class="whatsapp-id-error" role="alert" aria-live="polite"></div>' +
+                '<div class="whatsapp-id-modal-actions">' +
+                '<button type="button" class="btn btn-primary" id="whatsapp-modal-continue">Continue to WhatsApp</button>' +
+                '<button type="button" class="btn btn-secondary" id="whatsapp-modal-skip">I don\'t have my ID</button>' +
+                '</div>' +
+                '</div>';
+            document.body.appendChild(div);
+            backdrop = div;
+            inputEl = div.querySelector('#whatsapp-id-input');
+            errorEl = div.querySelector('#whatsapp-id-error');
+
+            div.addEventListener('click', function(e) {
+                if (e.target === div) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && backdrop && backdrop.classList.contains('is-open')) closeModal();
+            });
+            if (inputEl) {
+                inputEl.addEventListener('input', function() {
+                    this.value = this.value.replace(/\D/g, '');
+                    showIdError('');
+                });
+                inputEl.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        div.querySelector('#whatsapp-modal-continue').click();
+                    }
+                });
+            }
+            div.querySelector('#whatsapp-modal-continue').addEventListener('click', function() {
+                var raw = (inputEl && inputEl.value) ? inputEl.value.trim() : '';
+                var id = raw.replace(/\s/g, '');
+                if (!id) {
+                    showIdError('Please enter your ID number to continue.');
+                    if (inputEl) inputEl.focus();
+                    return;
+                }
+                if (id.length < 10) {
+                    showIdError('Please enter a valid ID number (at least 10 digits).');
+                    if (inputEl) inputEl.focus();
+                    return;
+                }
+                showIdError('');
+                var message = decodeURIComponent(defaultEncoded.replace(/\+/g, ' '));
+                message += '\nMy ID number: ' + id;
+                window.open(baseUrl + encodeURIComponent(message), '_blank', 'noopener,noreferrer');
+                closeModal();
+            });
+            div.querySelector('#whatsapp-modal-skip').addEventListener('click', function() {
+                if (pendingHref) window.open(pendingHref, '_blank', 'noopener,noreferrer');
+                closeModal();
+            });
+        }
+
+        function openModal(linkHref) {
+            pendingHref = linkHref || '';
+            createModal();
+            showIdError('');
+            if (inputEl) {
+                inputEl.value = '';
+                inputEl.removeAttribute('aria-invalid');
+                inputEl.focus();
+            }
+            backdrop.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            if (!backdrop) return;
+            backdrop.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', function(e) {
+            var a = e.target && (e.target.closest ? e.target.closest('a[href*="wa.me"]') : null);
+            if (!a || !a.href) return;
+            e.preventDefault();
+            e.stopPropagation();
+            openModal(a.href);
+        }, true);
+    }
+
     function init() {
         // Wait for DOM to be ready
         if (document.readyState === 'loading') {
@@ -404,6 +520,7 @@
             initHeaderScroll();
             initCurrentYear();
             initContactForm();
+            initWhatsAppModal();
             initLazyLoading();
             initScrollAnimations();
             initParallax();
