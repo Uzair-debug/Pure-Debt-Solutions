@@ -175,23 +175,17 @@ a {
     overflow: visible;
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
-    .header .container {
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-    }
-}
-
 .header {
     overflow: visible;
 }
 
+/* Compact, professional navbar – no overlap */
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px;
-    gap: 0.75rem;
+    height: 56px;
+    gap: 0.5rem;
     position: relative;
     overflow: visible;
     min-width: 0;
@@ -199,12 +193,14 @@ a {
 
 @media (min-width: 1200px) {
     .nav {
-        gap: 1.25rem;
+        height: 64px;
+        gap: 0.75rem;
     }
 }
 
 @media (max-width: 767px) {
     .nav {
+        height: 64px;
         gap: 0.5rem;
     }
 }
@@ -212,9 +208,9 @@ a {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 0.9375rem;
     color: var(--gray-900);
     text-decoration: none;
     transition: opacity 0.2s ease;
@@ -222,30 +218,44 @@ a {
     white-space: nowrap;
 }
 
+@media (min-width: 1200px) {
+    .logo {
+        font-size: 1rem;
+        gap: 0.6rem;
+    }
+}
+
 .logo:hover {
     opacity: 0.9;
 }
 
 .logo img {
-    height: 50px;
+    height: 36px;
     width: auto;
     object-fit: contain;
     display: block;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
     transition: transform 0.2s ease;
     flex-shrink: 0;
 }
 
+@media (min-width: 1200px) {
+    .logo img {
+        height: 40px;
+    }
+}
+
 .logo-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background: var(--primary-500);
     color: var(--white);
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
+    font-size: 0.875rem;
     flex-shrink: 0;
 }
 
@@ -273,11 +283,11 @@ a {
     position: relative;
 }
 
-/* Desktop menu */
+/* Desktop menu – tight, no overlap */
 @media (min-width: 768px) {
     .nav-menu {
         display: flex !important;
-        gap: 0.25rem;
+        gap: 0.15rem;
         position: static !important;
         transform: none !important;
         visibility: visible !important;
@@ -292,9 +302,20 @@ a {
         right: auto !important;
         width: auto !important;
     }
-    
     .nav-menu.active {
         display: flex !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav-menu {
+        gap: 0.35rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav-menu {
+        gap: 0.5rem;
     }
 }
 
@@ -304,72 +325,60 @@ a {
         display: none !important;
         position: absolute !important;
     }
-    
     .nav-menu.active {
         display: flex !important;
-    }
-}
-
-@media (min-width: 1024px) {
-    .nav-menu {
-        gap: 0.5rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .nav-menu {
-        gap: 0.75rem;
     }
 }
 
 .nav-menu a {
     color: var(--gray-700);
     font-weight: 500;
-    padding: 0.5rem 0.5rem;
+    padding: 0.35rem 0.45rem;
     position: relative;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
     display: block;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     white-space: nowrap;
-    border-radius: 6px;
+    border-radius: 4px;
+    letter-spacing: 0.01em;
 }
 
 @media (min-width: 1024px) {
+    .nav-menu a {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 1200px) {
     .nav-menu a {
         padding: 0.5rem 0.75rem;
         font-size: 0.9375rem;
     }
 }
 
-@media (min-width: 1200px) {
-    .nav-menu a {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
-}
-
 .nav-menu a::after {
     content: '';
     position: absolute;
-    bottom: 0.25rem;
+    bottom: 0.15rem;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 2px;
+    height: 1.5px;
     background: var(--primary-500);
-    transition: width 0.3s ease;
-    border-radius: 2px;
+    transition: width 0.2s ease;
+    border-radius: 1px;
 }
 
 .nav-menu a:hover::after,
 .nav-menu a.active::after {
-    width: calc(100% - 1.5rem);
+    width: calc(100% - 0.75rem);
 }
 
 .nav-menu a:hover,
 .nav-menu a.active {
     color: var(--primary-600);
-    background: rgba(14, 91, 120, 0.05);
+    background: rgba(14, 91, 120, 0.06);
 }
 
 .nav-menu a.active {
@@ -380,11 +389,14 @@ a {
     display: none;
     flex-shrink: 0;
     white-space: nowrap;
-    font-size: 0.75rem;
-    padding: 0.45rem 0.6rem;
-    margin-left: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.35rem 0.5rem;
+    margin-left: 0.35rem;
     overflow: visible;
     text-overflow: clip;
+    letter-spacing: 0.02em;
+    border-radius: 4px;
 }
 
 @media (min-width: 768px) {
@@ -392,52 +404,39 @@ a {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.75rem;
-        padding: 0.45rem 0.6rem;
-    }
-}
-
-/* Medium screens: scale down so CTA does not overlap Find Us */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .nav-menu {
-        gap: 0.2rem;
-    }
-    .nav-menu a {
-        padding: 0.4rem 0.4rem;
-        font-size: 0.8125rem;
-    }
-    .nav-cta {
-        font-size: 0.7rem;
-        padding: 0.4rem 0.5rem;
-        margin-left: 0.5rem;
-    }
-    .logo img {
-        height: 42px;
-    }
-    .logo-text {
-        font-size: 1rem;
+        font-size: 0.6875rem;
+        padding: 0.35rem 0.5rem;
     }
 }
 
 @media (min-width: 1024px) {
     .nav-cta {
-        font-size: 0.8125rem;
-        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        margin-left: 0.5rem;
     }
 }
 
 @media (min-width: 1200px) {
     .nav-cta {
-        font-size: 0.9375rem;
-        padding: 0.625rem 1.25rem;
-        margin-left: 1rem;
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.875rem;
+        margin-left: 0.75rem;
     }
 }
 
 @media (min-width: 1400px) {
     .nav-cta {
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        padding: 0.55rem 1rem;
+    }
+}
+
+/* Header container: compact padding so nav fits */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .header .container {
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
     }
 }
 
@@ -2121,7 +2120,7 @@ a {
 /* Mobile Menu */
 @media (max-width: 767px) {
     .nav {
-        height: 70px;
+        height: 64px;
         position: relative;
         overflow: visible;
     }
